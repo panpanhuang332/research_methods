@@ -1,0 +1,347 @@
+{
+  "version": "2.0.0",
+  "source": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/course",
+  "retrieved_at": "2026-09-17T07:40:29.353616+00:00",
+  "assets": [
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/framework-D_rUT4EX.js",
+      "path": "course/vendor/framework-D_rUT4EX.js",
+      "source_sha256": "939d0fabebb3b2f01753bb866b067d8d3384fb06da19f0e6557609d3b1a9f4f7",
+      "sha256": "939d0fabebb3b2f01753bb866b067d8d3384fb06da19f0e6557609d3b1a9f4f7",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/rolldown-runtime-C60lm6uB.js",
+      "path": "course/vendor/rolldown-runtime-C60lm6uB.js",
+      "source_sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75",
+      "sha256": "5db5ba82eef00d1dee7e86e663098c9427d01183a88d357437daff295aec3e75",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/lesson-DIhAjWhw.js",
+      "path": "course/vendor/lesson-DIhAjWhw.js",
+      "source_sha256": "762242350766864700308ecc62bdb2147c0917ba45a46929d1109f0a176b3cda",
+      "sha256": "ffdfb4857a6d5a5c4dfa98241db3e63025b0126211666eea4312bdab3239c261",
+      "unmodified": false,
+      "changes": "Inline figures; same-origin lesson navigation; explicit original-service links; no local comment-write UI."
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/table-B1rwHcI6.js",
+      "path": "course/vendor/table-B1rwHcI6.js",
+      "source_sha256": "5788f3a348b53dcb1ca44585696b8e9fa06385e9cd030db588fbc6871899c233",
+      "sha256": "5788f3a348b53dcb1ca44585696b8e9fa06385e9cd030db588fbc6871899c233",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/utils-D-zUrF0Q.js",
+      "path": "course/vendor/utils-D-zUrF0Q.js",
+      "source_sha256": "af61aee17246efd294bdca1457d1e576d1003955e704db358339ddd11697e4ca",
+      "sha256": "af61aee17246efd294bdca1457d1e576d1003955e704db358339ddd11697e4ca",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/course-iwkjHcS-.js",
+      "path": "course/vendor/course-iwkjHcS-.js",
+      "source_sha256": "d80454c15208f5cdc74c2a71680f0826e1890409873f6feb1c96e166460e99f9",
+      "sha256": "d80454c15208f5cdc74c2a71680f0826e1890409873f6feb1c96e166460e99f9",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/dist-BhQgzjd3.js",
+      "path": "course/vendor/dist-BhQgzjd3.js",
+      "source_sha256": "4753086c9c935a1adc33b530ceba1cd9d44b03433e8518efe2ba0fdeb056da75",
+      "sha256": "4753086c9c935a1adc33b530ceba1cd9d44b03433e8518efe2ba0fdeb056da75",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/dist-Cy2nbgvD.js",
+      "path": "course/vendor/dist-Cy2nbgvD.js",
+      "source_sha256": "ee78481a71a2b56e569b621f0238efb08253cac51e7deec978288771b24fd8ed",
+      "sha256": "ee78481a71a2b56e569b621f0238efb08253cac51e7deec978288771b24fd8ed",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/dist-DL90r8od.js",
+      "path": "course/vendor/dist-DL90r8od.js",
+      "source_sha256": "bae95dd2ac4b29da5236c562c82f4ea279a210f0b33b633ea62c32b12812c9cf",
+      "sha256": "bae95dd2ac4b29da5236c562c82f4ea279a210f0b33b633ea62c32b12812c9cf",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/dist-D9fCSqdW.js",
+      "path": "course/vendor/dist-D9fCSqdW.js",
+      "source_sha256": "1a239f619db6dc5ac3aede51eb1706b4f92443af1ec989bcdfd7e397b13599de",
+      "sha256": "1a239f619db6dc5ac3aede51eb1706b4f92443af1ec989bcdfd7e397b13599de",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/learner-client-Bk6N8jtJ.js",
+      "path": "course/vendor/learner-client-Bk6N8jtJ.js",
+      "source_sha256": "4a8e5c70902245793ec75ef60c20c7016c3a5bb1bd7fa9d3a6cb507d4e8cbadc",
+      "sha256": "4a8e5c70902245793ec75ef60c20c7016c3a5bb1bd7fa9d3a6cb507d4e8cbadc",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/createLucideIcon-y-7dqYhu.js",
+      "path": "course/vendor/createLucideIcon-y-7dqYhu.js",
+      "source_sha256": "515681cf2a6e9b267f1a86889f13150f3df5fa1c1ae1bc14f3dd0abf9f71ac9d",
+      "sha256": "515681cf2a6e9b267f1a86889f13150f3df5fa1c1ae1bc14f3dd0abf9f71ac9d",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/Icon-BOYp-35j.js",
+      "path": "course/vendor/Icon-BOYp-35j.js",
+      "source_sha256": "f3426f714786f25ed8a9e72c49b02957d2ff43e926a6c25381c556ef6b2d96d7",
+      "sha256": "f3426f714786f25ed8a9e72c49b02957d2ff43e926a6c25381c556ef6b2d96d7",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/clipboard-check-YrvOXDDo.js",
+      "path": "course/vendor/clipboard-check-YrvOXDDo.js",
+      "source_sha256": "7bf9a8f3fe4559a48a69ce759b441e8312dff970489484942b19ca65de6f0280",
+      "sha256": "7bf9a8f3fe4559a48a69ce759b441e8312dff970489484942b19ca65de6f0280",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/check-C95dv9AW.js",
+      "path": "course/vendor/check-C95dv9AW.js",
+      "source_sha256": "a3b46df0e79d49e78c1c788e23e150a86b07bb4ed418ec0e1d9e23c8bb510229",
+      "sha256": "a3b46df0e79d49e78c1c788e23e150a86b07bb4ed418ec0e1d9e23c8bb510229",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/dist-DJPeTPYf.js",
+      "path": "course/vendor/dist-DJPeTPYf.js",
+      "source_sha256": "f34ebb4b722dd8fc20d468aba1a2b2a60feed69cddd8090c4bf69bda9bf96e87",
+      "sha256": "f34ebb4b722dd8fc20d468aba1a2b2a60feed69cddd8090c4bf69bda9bf96e87",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/es2015-D0hRiG9o.js",
+      "path": "course/vendor/es2015-D0hRiG9o.js",
+      "source_sha256": "db16da48e6b296bef2aacae03c6f633bb762d6447f180aba12e94d57d02670a3",
+      "sha256": "db16da48e6b296bef2aacae03c6f633bb762d6447f180aba12e94d57d02670a3",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/arrow-up-right-D_PkdhX6.js",
+      "path": "course/vendor/arrow-up-right-D_PkdhX6.js",
+      "source_sha256": "a4724fc79d3d1527d54e0982192350dd782afd040d4fc47e33a9c57d5a0866b6",
+      "sha256": "a4724fc79d3d1527d54e0982192350dd782afd040d4fc47e33a9c57d5a0866b6",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/arrow-right-ySUmB9Mc.js",
+      "path": "course/vendor/arrow-right-ySUmB9Mc.js",
+      "source_sha256": "67ce4693eed53c4813f7759fbfaed2208311ef75e0e801ebab54ad2649f61d37",
+      "sha256": "67ce4693eed53c4813f7759fbfaed2208311ef75e0e801ebab54ad2649f61d37",
+      "unmodified": true
+    },
+    {
+      "url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/chunks/button-ydPIgiU6.js",
+      "path": "course/vendor/button-ydPIgiU6.js",
+      "source_sha256": "4132111f4515f09c9ea9bfd460c06bca284119336e152cc87074c9eaa42e5954",
+      "sha256": "4132111f4515f09c9ea9bfd460c06bca284119336e152cc87074c9eaa42e5954",
+      "unmodified": true
+    }
+  ],
+  "scope": "Public original lessons and diagrams share one reader. Formal assessment, comments and records remain on the original service.",
+  "private_data_copied": false,
+  "font_files_copied": false,
+  "original_chapters": 18,
+  "original_concept_sections": 54,
+  "curriculum_sha256": "eb1badf14cb32887946a40dac31a680ae7fc1eb18a19fac31f5841d6f8e47edc",
+  "simulation_csv": {
+    "source": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/data/simulated-service.csv",
+    "rows": 40,
+    "sha256": "7ef378aa6553c9959f12713dffa220505088889a12b0c534cc5f83a446620c50"
+  },
+  "diagram_mapping": {
+    "1": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "2": [
+      [
+        2,
+        2
+      ],
+      [
+        10,
+        2
+      ]
+    ],
+    "3": [
+      [
+        3,
+        1
+      ],
+      [
+        3,
+        2
+      ]
+    ],
+    "4": [
+      [
+        4,
+        1
+      ],
+      [
+        4,
+        2
+      ]
+    ],
+    "5": [
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ]
+    ],
+    "6": [
+      [
+        6,
+        1
+      ],
+      [
+        6,
+        2
+      ]
+    ],
+    "7": [
+      [
+        7,
+        1
+      ],
+      [
+        7,
+        2
+      ]
+    ],
+    "8": [
+      [
+        8,
+        1
+      ],
+      [
+        8,
+        2
+      ]
+    ],
+    "9": [
+      [
+        9,
+        1
+      ],
+      [
+        9,
+        2
+      ]
+    ],
+    "10": [
+      [
+        10,
+        1
+      ],
+      [
+        10,
+        2
+      ]
+    ],
+    "11": [
+      [
+        11,
+        1
+      ],
+      [
+        11,
+        2
+      ]
+    ],
+    "12": [
+      [
+        12,
+        1
+      ],
+      [
+        12,
+        2
+      ]
+    ],
+    "13": [
+      [
+        13,
+        1
+      ],
+      [
+        13,
+        2
+      ]
+    ],
+    "14": [
+      [
+        14,
+        1
+      ],
+      [
+        14,
+        2
+      ]
+    ],
+    "15": [
+      [
+        15,
+        1
+      ],
+      [
+        15,
+        2
+      ]
+    ],
+    "16": [
+      [
+        16,
+        1
+      ],
+      [
+        16,
+        2
+      ]
+    ],
+    "17": [
+      [
+        17,
+        1
+      ],
+      [
+        17,
+        2
+      ]
+    ],
+    "18": [
+      [
+        18,
+        1
+      ],
+      [
+        18,
+        2
+      ]
+    ]
+  },
+  "unique_diagram_designs": 36,
+  "homepage_sha256": "b7387dda87adbb26c239147d46aae1445b91c4d0dfa3fb16959e5556a83a87b2"
+}
