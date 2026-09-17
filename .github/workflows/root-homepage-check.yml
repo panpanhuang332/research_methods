@@ -1,0 +1,46 @@
+name: Root homepage checks
+
+on:
+  push:
+    paths:
+      - 'index.html'
+      - 'assets/portal-art.css'
+      - 'tests/check_homepage.py'
+      - '.github/workflows/root-homepage-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: root-homepage-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  homepage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser tools
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Check local homepage and wait for exact live Pages content
+        run: python tests/check_homepage.py
+      - name: Save verification report and desktop/mobile screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: root-homepage-verification
+          path: |
+            homepage-qa/
+            index.html
+            assets/portal-art.css
+          if-no-files-found: error
+          retention-days: 7
