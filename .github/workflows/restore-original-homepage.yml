@@ -1,0 +1,72 @@
+name: Restore original homepage artwork
+on:
+  push:
+    branches: ['fix/original-homepage-artwork']
+    paths:
+      - 'scripts/restore_original_homepage.py'
+      - 'scripts/fix_portal_font_sources.py'
+      - 'tests/check_homepage.py'
+      - '.github/workflows/restore-original-homepage.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: restore-original-homepage-artwork
+  cancel-in-progress: true
+jobs:
+  restore:
+    if: github.ref == 'refs/heads/fix/original-homepage-artwork'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/original-homepage-artwork
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verification tools
+        run: |
+          python -m pip install -q playwright beautifulsoup4 pillow
+          python -m playwright install --with-deps chromium > /tmp/browser-install.log 2>&1 || { cat /tmp/browser-install.log; exit 1; }
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Restore reviewed artwork and its original typeface families
+        run: |
+          python scripts/restore_original_homepage.py
+          python scripts/fix_portal_font_sources.py
+      - name: Verify images, comparison, seven viewports, navigation and fonts
+        run: |
+          python tests/check_homepage.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('homepage-qa/report.json').read_text())
+          for size,fonts in r['font_diagnostics'].items():
+              assert fonts and all(f['status'] != 'error' for f in fonts), (size,fonts)
+              assert any(f['family']=='Portal Brush' and f['status']=='loaded' for f in fonts), (size,fonts)
+              assert any(f['family']=='Portal Serif' and f['status']=='loaded' for f in fonts), (size,fonts)
+          print('Original typeface families loaded successfully at every tested viewport.')
+          PY
+      - name: Commit verified correction to the isolated branch only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- index.html assets docs/homepage-source.md README.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: restore original homepage artwork and cross-origin-compatible original typefaces'
+            git push origin HEAD:fix/original-homepage-artwork
+          fi
+          git rev-parse HEAD > homepage-qa/restoration-commit.txt
+      - name: Save evidence without any font binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: restored-original-homepage-review
+          path: |
+            homepage-qa/
+            index.html
+            assets/original-homepage/
+            docs/homepage-source.md
+          retention-days: 7
+          if-no-files-found: error
