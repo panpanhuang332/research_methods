@@ -1,8 +1,6 @@
 """Root homepage regression checks. No production writes or student data access."""
 from __future__ import annotations
-
 import hashlib
-import io
 import json
 import os
 from pathlib import Path
@@ -11,7 +9,6 @@ import time
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from urllib.request import Request, urlopen
-
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -52,7 +49,7 @@ def inspect(page, label: str, url: str) -> None:
         check(prefix + '-entry-in-first-screen', btn['y']+btn['height'] <= height, btn)
         check(prefix + '-minimum-touch-target', btn['height'] >= 44)
         check(prefix + '-no-platform-login', page.locator('a,button').filter(has_text='ChatGPT').count() == 0)
-        check(prefix + '-scope-disclosure', '原課程評量、教師評閱、留言與學習紀錄尚未移轉' in page.locator('.scope').inner_text())
+        check(prefix + '-scope-disclosure', '原課程評量、教師評閱、留言與學習紀錄尚未移轉' in page.locator('.scope').text_content())
         for selector in ['#ancient-title', '#modern-title', '.ancient .cta', '#modern-entry']:
             check(prefix + '-text-fits-' + selector, page.locator(selector).evaluate('(el)=>el.scrollWidth <= el.clientWidth + 1'))
         images = page.evaluate('''async () => {
@@ -102,8 +99,7 @@ def main() -> None:
     try:
         with sync_playwright() as p:
             browser = p.chromium.launch()
-            page = browser.new_page()
-            inspect(page, 'local', local)
+            inspect(browser.new_page(), 'local', local)
             if os.getenv('GITHUB_ACTIONS') == 'true':
                 deadline = time.monotonic() + 240
                 last_error = 'Deployment bytes did not match yet'
