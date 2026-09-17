@@ -1,0 +1,97 @@
+name: Integrated course checks
+on:
+  push:
+    branches: [feat/integrated-course, main]
+    paths:
+      - 'course/**'
+      - 'scripts/integrate_course.py'
+      - 'tests/check_integrated_course.py'
+      - '.github/workflows/integrated-course.yml'
+      - 'index.html'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: integrated-course-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  build-review:
+    if: github.ref == 'refs/heads/feat/integrated-course'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with: {ref: feat/integrated-course}
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install read-only verification tools
+        run: |
+          pip install -q playwright beautifulsoup4 pillow
+          python -m playwright install --with-deps chromium >/tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Integrate verified original lessons and diagram components
+        run: |
+          python scripts/integrate_course.py
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('course/index.html')
+          s=p.read_text().replace('../docs/integrated-course"','https://github.com/panpanhuang332/research_methods/blob/main/docs/integrated-course.md"')
+          p.write_text(s)
+          p=Path('course/course.css')
+          s=p.read_text().replace('font:12px/1.5 inherit;','font-family:inherit;font-size:12px;line-height:1.5;').replace('font:12px/1.3 inherit;','font-family:inherit;font-size:12px;line-height:1.3;')
+          p.write_text(s)
+          PY
+      - name: Check all original chapter content, graphs, mobile, interactions and source boundaries
+        run: |
+          python tests/check_integrated_course.py
+          python tests/check_homepage.py
+      - name: Commit only verified integration files to the review branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- course index.html assets/original-homepage/source-manifest.json tests/check_homepage.py README.md docs/integrated-course.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'feat: combine original 18-week course and 36 diagram designs in one reader'
+            git push origin HEAD:feat/integrated-course
+          fi
+          git rev-parse HEAD > qa-integration/verified-commit.txt
+      - name: Save review evidence and integrated source (no fonts or student records)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integrated-course-review
+          path: |
+            qa-integration/
+            homepage-qa/
+            course/
+            docs/integrated-course.md
+            index.html
+            tests/check_homepage.py
+          retention-days: 7
+          if-no-files-found: error
+  live-verification:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Install verification tools
+        run: |
+          pip install -q playwright pillow
+          python -m playwright install --with-deps chromium >/tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq fonts-noto-cjk
+      - name: Verify local content and exact live GitHub Pages integration
+        env: {CHECK_LIVE: '1'}
+        run: python tests/check_integrated_course.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integrated-course-live-verification
+          path: qa-integration/
+          retention-days: 7

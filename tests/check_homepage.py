@@ -57,9 +57,9 @@ def inspect(page,label,url,manifest):
         check(prefix+'-correct-source-image',expected in image['src'] and '/assets/original-homepage/' in image['src'],image['src'])
         check(prefix+'-no-sliced-backgrounds',page.locator('.portal-scene img').evaluate('(e)=>getComputedStyle(e).objectFit')=='cover')
         check(prefix+'-ancient-reserved',page.locator('.ancient-gate').is_disabled() and '尚未開放' in page.locator('#ancient-status').inner_text())
-        check(prefix+'-modern-visuals-link',page.locator('.modern-gate').get_attribute('href')=='./visuals/')
-        for selector,path in [('.joint-login','progress'),('.access-note a:not(.origin-course)','teacher'),('.origin-course','course')]:
-            check(prefix+'-original-link-'+path,page.locator(selector).get_attribute('href')==SOURCE+path)
+        check(prefix+'-modern-integrated-link',page.locator('.modern-gate').get_attribute('href')=='./course/')
+        for selector,path in [('.joint-login','progress'),('.access-note a:not(.origin-course)','teacher'),('.origin-course',None)]:
+            check(prefix+'-service-link-'+str(path),page.locator(selector).get_attribute('href')==(SOURCE+path if path else './course/'))
         if width<=780:
             for selector in ['.ancient-gate','.modern-gate','.joint-login']:
                 box=page.locator(selector).bounding_box()
@@ -83,8 +83,8 @@ def inspect(page,label,url,manifest):
             REPORT['visual_comparison'][prefix]['maximum_layout_delta']=max(abs(now[s][key]-values[key]) for s,values in old.items() for key in values)
     page.locator('.modern-gate').click()
     page.wait_for_selector('research-chapter-visuals',timeout=30000)
-    check(label+'-modern-destination-works','/visuals/' in page.url and page.locator('#nav a').count()==18)
-    check(label+'-chapter-rendered',page.locator('research-chapter-visuals .card').count()==2)
+    check(label+'-modern-destination-works','/course/' in page.url and page.locator('#course-nav a[data-week]').count()==18)
+    check(label+'-chapter-rendered',page.locator('research-chapter-visuals .card').count()==3)
     check(label+'-no-javascript-errors',not errors,errors)
 
 def live_matches(manifest):
