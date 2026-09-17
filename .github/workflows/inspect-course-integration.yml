@@ -1,0 +1,80 @@
+name: Inspect course integration
+on:
+  push:
+    branches: [feat/integrated-course]
+    paths: [.github/workflows/inspect-course-integration.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.12'}
+      - name: Browser setup
+        run: |
+          pip install -q playwright beautifulsoup4
+          python -m playwright install --with-deps chromium >/tmp/install.log 2>&1 || { cat /tmp/install.log; exit 1; }
+      - name: Inspect anonymous public course only
+        run: |
+          python - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          from urllib.parse import urlparse,urljoin
+          from playwright.sync_api import sync_playwright
+          from bs4 import BeautifulSoup
+          origin='https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site'
+          out=Path('course-inspection');out.mkdir()
+          report={'source':origin+'/course','pages':[],'assets':[]}
+          with sync_playwright() as p:
+              browser=p.chromium.launch();context=browser.new_context(viewport={'width':1440,'height':1000})
+              page=context.new_page();requests=[]
+              page.on('request',lambda r:requests.append({'url':r.url,'method':r.method,'type':r.resource_type}))
+              # Read-only inspection: do not create sessions, submissions, comments or teacher activity.
+              def guard(route):
+                  if route.request.method not in ['GET','HEAD','OPTIONS']:route.abort()
+                  elif '/api/comments' in route.request.url:route.fulfill(status=200,content_type='application/json',body='{"comments":[]}')
+                  else:route.continue_()
+              page.route('**/*',guard)
+              for name,path in [('course','/course'),('assessment','/assessment/1')]:
+                  r=page.goto(origin+path,wait_until='networkidle',timeout=60000)
+                  page.wait_for_timeout(500)
+                  soup=BeautifulSoup(page.content(),'html.parser')
+                  # Exclude cookies, storage, API responses and all student records from the export.
+                  (out/(name+'.html')).write_text(str(soup),encoding='utf-8')
+                  (out/(name+'.txt')).write_text(page.locator('body').inner_text(),encoding='utf-8')
+                  report['pages'].append({'name':name,'title':page.title(),'status':r.status,'headers':{k:v for k,v in r.headers.items() if k in ['content-security-policy','x-frame-options','access-control-allow-origin']},'links':page.locator('a').evaluate_all('(es)=>es.map(e=>({text:e.innerText,href:e.getAttribute("href")}))'),'buttons':page.locator('button,[role=tab]').evaluate_all('(es)=>es.map(e=>({text:e.innerText,role:e.getAttribute("role"),cls:e.className}))')})
+                  page.screenshot(path=str(out/(name+'.png')),full_page=True)
+              urls={r['url'] for r in requests if r['type']=='script' and '/_next/static/' in r['url'] and urlparse(r['url']).netloc==urlparse(origin).netloc}
+              pending=list(urls)
+              import re
+              while pending:
+                  u=pending.pop()
+                  if any(x['url']==u for x in report['assets']):continue
+                  r=context.request.get(u,timeout=30000)
+                  if r.status!=200:continue
+                  b=r.body();name=Path(urlparse(u).path).name
+                  if len(b)>2000000:continue
+                  (out/name).write_bytes(b)
+                  report['assets'].append({'url':u,'file':name,'size':len(b),'sha256':hashlib.sha256(b).hexdigest()})
+                  for rel in re.findall(r'from\s*["\x27]([^"\x27]+)["\x27]|import\(["\x27]([^"\x27]+)["\x27]\)',b.decode('utf-8')):
+                      target=urljoin(u,rel[0] or rel[1])
+                      if '/_next/static/' in target and target not in urls:urls.add(target);pending.append(target)
+              # Assess embedding as a normal browser; do not alter security headers or credentials.
+              page.goto('https://panpanhuang332.github.io/research_methods/',wait_until='networkidle')
+              page.evaluate('(u)=>{const f=document.createElement("iframe");f.src=u;f.id="integration-probe";document.body.append(f)}',origin+'/assessment/1')
+              page.wait_for_timeout(2000)
+              report['iframe']=[{'url':f.url,'title':f.title() if f.url.startswith(origin) else ''} for f in page.frames]
+              report['requests']=[r for r in requests if not '/cdn-cgi/' in r['url']]
+              browser.close()
+          (out/'report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          print(json.dumps({'pages':report['pages'],'assets':report['assets'],'iframe':report['iframe']},ensure_ascii=False))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public-course-integration-inspection
+          path: course-inspection/
+          retention-days: 3
