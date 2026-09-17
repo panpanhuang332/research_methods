@@ -1,0 +1,58 @@
+name: Restore original homepage artwork
+on:
+  push:
+    branches: ['fix/original-homepage-artwork']
+    paths:
+      - 'scripts/restore_original_homepage.py'
+      - 'tests/check_homepage.py'
+      - '.github/workflows/restore-original-homepage.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: restore-original-homepage-artwork
+  cancel-in-progress: true
+jobs:
+  restore:
+    if: github.ref == 'refs/heads/fix/original-homepage-artwork'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/original-homepage-artwork
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install verification tools
+        run: |
+          python -m pip install playwright beautifulsoup4 pillow
+          python -m playwright install --with-deps chromium
+          sudo apt-get update -qq
+          sudo apt-get install -y fonts-noto-cjk
+      - name: Copy only the reviewed original homepage presentation
+        run: python scripts/restore_original_homepage.py
+      - name: Verify images, source comparison, seven viewports and navigation
+        run: python tests/check_homepage.py
+      - name: Commit only the verified homepage correction to the isolated branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- index.html assets/original-homepage assets/portal-art.css docs/homepage-source.md README.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: restore original research-methods-18 homepage and eight unmodified responsive images'
+            git push origin HEAD:fix/original-homepage-artwork
+          fi
+          git rev-parse HEAD > homepage-qa/restoration-commit.txt
+      - name: Save review evidence without any font binaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: restored-original-homepage-review
+          path: |
+            homepage-qa/
+            index.html
+            assets/original-homepage/
+            docs/homepage-source.md
+          retention-days: 7
+          if-no-files-found: error
