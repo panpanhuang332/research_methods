@@ -1,0 +1,71 @@
+{
+  "source": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/",
+  "retrieved_at": "2026-09-17T06:26:00.336021+00:00",
+  "images": [
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-desktop-1280.avif",
+      "path": "assets/original-homepage/portal-desktop-1280.avif",
+      "size": 87607,
+      "sha256": "d8d878ebb45eebef90364f7b0efac19eb9c48e3b56b5e7bb802ac9ba415b2558",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-desktop-1280.webp",
+      "path": "assets/original-homepage/portal-desktop-1280.webp",
+      "size": 152532,
+      "sha256": "492a59e1a24d0fe1647668705c3eded53379dcab07158ceae0bebdf871622892",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-desktop-1536.avif",
+      "path": "assets/original-homepage/portal-desktop-1536.avif",
+      "size": 115335,
+      "sha256": "14eee9d1b33f2373d6c6f368792ef096f0d094a046e3738429e5214d29258318",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-desktop-1536.webp",
+      "path": "assets/original-homepage/portal-desktop-1536.webp",
+      "size": 198384,
+      "sha256": "a9581db42bd0ecbddac81521fcfc43e5e412480c0f412fee1c6f4d75fecc9b27",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-mobile-480.avif",
+      "path": "assets/original-homepage/portal-mobile-480.avif",
+      "size": 34266,
+      "sha256": "1c24dba8bd307fec39c06b57946202de302b9033a122da34e7125a180ec78378",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-mobile-480.webp",
+      "path": "assets/original-homepage/portal-mobile-480.webp",
+      "size": 62178,
+      "sha256": "8e67b10314b0527182cba08ca2b7177bdc58936021c137bfa9b2ae378f168781",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-mobile-768.avif",
+      "path": "assets/original-homepage/portal-mobile-768.avif",
+      "size": 72111,
+      "sha256": "cc23ae69c01d65398b9ef61229d57258c7c9f7e6555e0be889446edfe65c1e5c",
+      "unmodified": true
+    },
+    {
+      "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/portal-mobile-768.webp",
+      "path": "assets/original-homepage/portal-mobile-768.webp",
+      "size": 125946,
+      "sha256": "21f88c43f2a23d4367ddf2c4ec6104d211841823d32bec63f243a363662b473b",
+      "unmodified": true
+    }
+  ],
+  "fonts_copied": false,
+  "application_scripts_copied": false,
+  "stylesheet": {
+    "source_url": "https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/_next/static/css/index.BdgRN3Dj.css",
+    "source_sha256": "604e6bc83e055a7b666b3a24081e5df7eb6e8ac54b23c9db3214ae8453f9e377",
+    "path": "assets/original-homepage/portal.css",
+    "sha256": "b583031461747904f6b922710b16716935004721bc4b89b87c7dbf427b174c82"
+  },
+  "homepage_sha256": "ada35c5b618eb9bcadc00b95266186b7dc4f55045b20c14698d56c2c9892eaf7"
+}

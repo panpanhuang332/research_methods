@@ -2,6 +2,12 @@
 
 服務與科技管理研究所一年級，無統計先修，每週120分鐘。依使用者的18週教學圖建立完整18章。貫穿案例為「AI客服回覆更快，顧客滿意度卻未明顯改善」。
 
+## 首頁圖案：恢復指定原站版本
+
+[開啟古今聯合首頁](https://panpanhuang332.github.io/research_methods/) ／ [指定原站](https://research-methods-18.e5060b85-02c2-4336-b68d-483091a94ab8.chatgpt.site/)
+
+首頁恢復原站完整桌面／手機背景與排版，不再使用裁切拼接的替代入口。[圖片來源、校驗與導覽範圍](docs/homepage-source.md)。現代入口進入本站圖解教材，學習紀錄與教師管理連回原課程。
+
 ## 直接開啟18章圖解教材
 
 **[開啟線上圖解教材：18章、36組圖解](https://panpanhuang332.github.io/research_methods/visuals/)**
