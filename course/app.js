@@ -3,6 +3,17 @@ import {i as getReact, t as getReactDOM} from './vendor/framework-D_rUT4EX.js';
 import Lesson from './vendor/lesson-DIhAjWhw.js';
 import {a as units, i as stages, r as ranges} from './vendor/course-iwkjHcS-.js';
 
+// React assigns existing custom-element properties. Preserve the component's
+// chapter getter and route assignments through its observed HTML attribute.
+await customElements.whenDefined('research-chapter-visuals');
+const diagramPrototype = customElements.get('research-chapter-visuals').prototype;
+const chapterProperty = Object.getOwnPropertyDescriptor(diagramPrototype, 'chapter');
+if (chapterProperty && !chapterProperty.set) {
+  Object.defineProperty(diagramPrototype, 'chapter', {
+    ...chapterProperty,
+    set(value) { this.setAttribute('chapter', String(value)); }
+  });
+}
 const React = getReact();
 const {createRoot} = getReactDOM();
 const $ = id => document.getElementById(id);
@@ -78,5 +89,4 @@ if(overview) {
   document.title=`第${week}週 ${units[week-1].title}｜研究方法整合課程`;
   root.render(React.createElement(Lesson,{unit:units[week-1],displayName:'',initialTab:tab}));
 }
-// Metadata only: no cookies, local storage, API endpoints or personal records.
 window.IntegratedCourse=Object.freeze({version:'2.0.0',week,chapterCount:units.length,backend:'original-service',contentSource:'original-public-course',overview});
